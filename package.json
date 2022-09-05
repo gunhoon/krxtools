@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/gunhoon/krxtools/issues"
   },
-  "homepage": "https://github.com/gunhoon/krxtools#readme"
+  "homepage": "https://github.com/gunhoon/krxtools#readme",
+  "dependencies": {
+    "puppeteer": "^17.1.1"
+  }
 }
