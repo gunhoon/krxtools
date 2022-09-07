@@ -36,5 +36,18 @@ const puppeteer = require('puppeteer');
     });
     await page.waitForTimeout(3000);
 
+    const menu_id = 'MDC0201';
+
+    // lnb search
+    const lnb_root = await page.$('#jsMdiMenu');
+    const lnb_tree = await lnb_root.$('div.lnb_tree');
+    const mdi_menu = await lnb_tree.$('ul.lnb_tree_wrap > li[data-depth-menu-id=' + menu_id + ']');
+
+    // 전체열기 버튼을 찾아서 클릭
+    const open_btn = await mdi_menu.$('li.freak > button');
+    await open_btn.click();
+
+    await page.waitForTimeout(3000);
+
     await browser.close();
 })();
