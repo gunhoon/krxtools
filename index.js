@@ -73,6 +73,10 @@ const puppeteer = require('puppeteer');
             if (counter == 0) {
                 anchor = await child_menu.$('a.CI-MDI-MENU');
                 await anchor.click();
+
+                // 탭 전체 닫기
+                const close_tab = await page.$('#jsCloseAllViewsButton');
+                await close_tab.click();
             }
             counter += 1;
         }
