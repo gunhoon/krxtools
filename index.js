@@ -49,5 +49,34 @@ const puppeteer = require('puppeteer');
 
     await page.waitForTimeout(3000);
 
+    page.on('request', (req) => {
+        if (req.url() == 'http://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd') {
+            console.log(req.postData());
+        }
+    });
+
+    // MENU 찾기
+    const menu_list = await mdi_menu.$$('div.lnb_tree_box > ul.lnb_tree_root > li')
+
+    for (let root_menu of menu_list) {
+        const menu_title = await root_menu.$eval('a', el => el.innerText);
+        console.log('-----' + menu_title + '-----');
+
+        const child_menu_list = await root_menu.$$('li.CI-MDI-MENU-NO-CHILD');
+
+        let counter = 0;
+
+        for (let child_menu of child_menu_list) {
+            const child_title = await child_menu.$eval('a', el => el.innerText);
+            console.log(child_title);
+
+            if (counter == 0) {
+                anchor = await child_menu.$('a.CI-MDI-MENU');
+                await anchor.click();
+            }
+            counter += 1;
+        }
+    }
+
     await browser.close();
 })();
