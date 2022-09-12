@@ -1,20 +1,6 @@
 const puppeteer = require('puppeteer');
 
-(async () => {
-    const browser = await puppeteer.launch({
-        args: [
-            '--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
-        ],
-        headless: true,
-        slowMo: 250
-    });
-
-    console.log(await browser.version());
-    console.log(await browser.userAgent());
-
-    const page = await browser.newPage();
-    await page.goto('http://data.krx.co.kr/contents/MDC/MAIN/main/index.cmd');
-
+async function click_gnb_menu(page, menu_id) {
     // GNB(Global Navigation Bar)에서 MDI 메뉴를 찾음.
     const gnb_area = await page.$('#jsGnbArea');
     const sub_menu = await gnb_area.$('div > ul');
@@ -35,9 +21,9 @@ const puppeteer = require('puppeteer');
         el.click();
     });
     await page.waitForTimeout(3000);
+}
 
-    const menu_id = 'MDC0201';
-
+async function open_all_lnb_menu(page, menu_id) {
     // lnb search
     const lnb_root = await page.$('#jsMdiMenu');
     const lnb_tree = await lnb_root.$('div.lnb_tree');
@@ -48,7 +34,9 @@ const puppeteer = require('puppeteer');
     await open_btn.click();
 
     await page.waitForTimeout(3000);
+}
 
+async function navigate_lnb_menu(page, menu_id) {
     page.on('request', (req) => {
         if (req.url() == 'http://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd') {
             console.log(req.postData());
@@ -81,6 +69,32 @@ const puppeteer = require('puppeteer');
             counter += 1;
         }
     }
+}
+
+(async () => {
+    const browser = await puppeteer.launch({
+        headless: true,
+        slowMo: 250
+    });
+
+    console.log(await browser.version());
+
+    let user_agent = await browser.userAgent();
+    console.log(user_agent);
+    user_agent = user_agent.replace('HeadlessChrome', 'Chrome');
+
+    //const url = 'https://example.com';
+    const url = 'http://data.krx.co.kr/contents/MDC/MAIN/main/index.cmd';
+    // MDC0201 : 기초 통계
+    const menu_id = 'MDC0201';
+
+    const page = await browser.newPage();
+    await page.setUserAgent(user_agent);
+    await page.goto(url, {
+        waitUntil: 'networkidle0'
+    });
+
+    console.log(await page.evaluate(() => navigator.userAgent));
 
     await browser.close();
 })();
