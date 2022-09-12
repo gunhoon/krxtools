@@ -90,10 +90,14 @@ async function navigate_lnb_menu(page, menu_id) {
 
     const page = await browser.newPage();
     await page.setUserAgent(user_agent);
+    await page.setViewport({
+        width: 1280,
+        height: 720
+    });
+
     await page.goto(url, {
         waitUntil: 'networkidle0'
     });
-
     console.log(await page.evaluate(() => navigator.userAgent));
 
     await browser.close();
