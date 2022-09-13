@@ -1,0 +1,42 @@
+[
+    [
+        "MDC02",
+        "/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201",
+        "통계"
+    ],
+    [
+        "MDC03",
+        "/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0301",
+        "쉽게 보는 통계"
+    ],
+    [
+        "MDC0201",
+        "/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0201",
+        "기본 통계"
+    ],
+    [
+        "MDC0202",
+        "/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0202",
+        "이슈 통계"
+    ],
+    [
+        "MDC0203",
+        "/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0203",
+        "공매도 통계"
+    ],
+    [
+        "MDC0204",
+        "/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0204",
+        "통계DB 정보"
+    ],
+    [
+        "MDC0301",
+        "/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0301",
+        "주요 통계"
+    ],
+    [
+        "MDC0302",
+        "/contents/MDC/MDI/mdiLoader/index.cmd?menuId=MDC0302",
+        "순위 통계"
+    ]
+]
